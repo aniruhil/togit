@@ -3,6 +3,7 @@ title: "Testing git again"
 author: "Ruhil"
 date: "2026-04-13"
 output: html_document
+
 editor_options: 
   chunk_output_type: console
 ---
@@ -43,7 +44,7 @@ diamonds %>%
 
 You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
+```{r pressure, fig.alt= "This is a radial plot that shows mean, minimum, and maximum temperatures across one full calendar year for San Francisco"}
 
 library(highcharter)
 data(weather)
@@ -92,3 +93,38 @@ hchart(
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+# Here is a table
+
+The first one is interactive 
+
+```{r}
+
+diamonds %>%
+  sample_n(20) %>%
+  DT::datatable(caption = "Table 1: A Sample of the Diamonds Data")
+
+
+```
+
+but the second is not ...
+
+
+```{r}
+
+diamonds %>%
+  summarize(
+    `Mean Price` = mean(price, na.rm = TRUE),
+    `Std. Dev Price` = sd(price, na.rm = TRUE),
+    `Min Price` = min(price, na.rm = TRUE),
+    `Max Price` = max(price, na.rm = TRUE)
+    ) %>%
+  knitr::kable(
+    caption = "Table 2: Summary Statistics of the Diamonds Data"
+  ) %>%
+  kableExtra::kable_styling("striped")
+
+```
+
+
+This is how you can create a footnote.^[Hello little footnote!]
